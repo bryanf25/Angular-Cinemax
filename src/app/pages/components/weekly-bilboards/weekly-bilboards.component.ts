@@ -20,12 +20,14 @@ export class WeeklyBilboardsComponent implements OnInit {
 
   imgUrl: string = '../../../../assets/imagenes/posters/';
   
-  arrayImg: string[] = [
+  arrayWeeklyImg: string[] = [
     'BatmanVSSuperman',
     'cowboys_aliens',
     'gernika',
     'guardians-galaxy',
     'mostruos_vs_alienigenas',
+  ]
+  arrayPremiersImg: string[] = [
     'pacific-rim',
     'RogueOneP',
     'stars',
@@ -33,10 +35,12 @@ export class WeeklyBilboardsComponent implements OnInit {
     'venom',
   ]
 
-  arrayweekly: string[] = this.getImageUrls();
+  arrayweekly: string[] = this.getImageUrls(this.arrayWeeklyImg);
+  arraypremiers: string[] = this.getImageUrls(this.arrayPremiersImg);
+  
 
-getImageUrls() :string[]{
-  return this.arrayImg.map(name =>  this.imgUrl + name + '.jpg');
+getImageUrls(array:string[]) :string[]{
+  return array.map(name =>  this.imgUrl + name + '.jpg');
 }
 
 }
