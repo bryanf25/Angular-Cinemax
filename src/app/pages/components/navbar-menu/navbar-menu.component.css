@@ -1,0 +1,8 @@
+.brand-logo{
+    padding-top: 8px;
+}
+.dropdown-content li>a,
+.dropdown-content li>span{
+    color: aliceblue;
+    background-color: #2962FF ;
+}
