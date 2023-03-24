@@ -6,6 +6,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { NavbarSocialComponent } from './pages/components/navbar-social/navbar-social.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarMenuComponent } from './pages/components/navbar-menu/navbar-menu.component';
+import { MoviesFilterComponent } from './pages/components/movies-filter/movies-filter.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { NavbarMenuComponent } from './pages/components/navbar-menu/navbar-menu.
     AppComponent,
     LandingPageComponent,
     NavbarSocialComponent,
-    NavbarMenuComponent
+    NavbarMenuComponent,
+    MoviesFilterComponent
   ],
   imports: [
     BrowserModule,
