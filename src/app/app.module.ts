@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarMenuComponent } from './pages/components/navbar-menu/navbar-menu.component';
 import { MoviesFilterComponent } from './pages/components/movies-filter/movies-filter.component';
 import { SlidesComponent } from './pages/components/slides/slides.component';
+import { WeeklyBilboardsComponent } from './pages/components/weekly-bilboards/weekly-bilboards.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SlidesComponent } from './pages/components/slides/slides.component';
     NavbarSocialComponent,
     NavbarMenuComponent,
     MoviesFilterComponent,
-    SlidesComponent
+    SlidesComponent,
+    WeeklyBilboardsComponent
   ],
   imports: [
     BrowserModule,
