@@ -7,6 +7,7 @@ import { NavbarSocialComponent } from './pages/components/navbar-social/navbar-s
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarMenuComponent } from './pages/components/navbar-menu/navbar-menu.component';
 import { MoviesFilterComponent } from './pages/components/movies-filter/movies-filter.component';
+import { SlidesComponent } from './pages/components/slides/slides.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MoviesFilterComponent } from './pages/components/movies-filter/movies-f
     LandingPageComponent,
     NavbarSocialComponent,
     NavbarMenuComponent,
-    MoviesFilterComponent
+    MoviesFilterComponent,
+    SlidesComponent
   ],
   imports: [
     BrowserModule,
