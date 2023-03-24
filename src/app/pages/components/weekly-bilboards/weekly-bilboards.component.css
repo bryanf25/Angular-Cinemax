@@ -7,6 +7,10 @@
     margin-left: 3% !important;
 }
 
+.row{
+    margin-bottom: 0px !important;
+}
+
  /* .card-image img {
      sirve para ajustar las imagenes y no se desborden de su contenedor
     de esta manera no aparecen espacios en blanco 
