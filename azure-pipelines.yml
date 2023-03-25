@@ -10,10 +10,22 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: './'
+    customCommand: 'build'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: './'
+    customCommand: 'test'
+
 
 - script: |
     npm install -g @angular/cli
