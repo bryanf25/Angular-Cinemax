@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NavbarSocialComponent } from './navbar-social.component';
 
@@ -8,7 +9,10 @@ describe('NavbarSocialComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavbarSocialComponent ]
+      declarations: [ NavbarSocialComponent ],
+      imports:[
+        FontAwesomeModule
+      ]
     })
     .compileComponents();
 
