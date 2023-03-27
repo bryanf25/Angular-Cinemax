@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { WeeklyBilboardsComponent } from './weekly-bilboards.component';
 
@@ -8,7 +9,10 @@ describe('WeeklyBilboardsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WeeklyBilboardsComponent ]
+      declarations: [ WeeklyBilboardsComponent ],
+      imports:[
+        FontAwesomeModule
+      ]
     })
     .compileComponents();
 

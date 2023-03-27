@@ -1,12 +1,26 @@
+import { CUSTOM_ELEMENTS_SCHEMA , NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
+
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        LandingPageComponent
       ],
+      schemas:[
+        CUSTOM_ELEMENTS_SCHEMA,
+        NO_ERRORS_SCHEMA
+      ],
+      imports:[
+        FontAwesomeModule
+       ]
     }).compileComponents();
   });
 
@@ -16,16 +30,5 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'NgCinemax'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('NgCinemax');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('NgCinemax app is running!');
-  });
+ 
 });

@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarMenuComponent } from './navbar-menu.component';
+declare var $:any; 
 
 describe('NavbarMenuComponent', () => {
   let component: NavbarMenuComponent;
   let fixture: ComponentFixture<NavbarMenuComponent>;
+  
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
