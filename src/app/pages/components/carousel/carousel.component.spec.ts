@@ -18,6 +18,6 @@ describe('CarouselComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeFalse();
+    expect(component).toBeTruthy();
   });
 });
