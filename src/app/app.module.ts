@@ -11,6 +11,9 @@ import { SlidesComponent } from './pages/components/slides/slides.component';
 import { WeeklyBilboardsComponent } from './pages/components/weekly-bilboards/weekly-bilboards.component';
 import { CarouselComponent } from './pages/components/carousel/carousel.component';
 import { FooterComponent } from './pages/components/footer/footer.component';
+import { LandingPageService } from './services/landing-page.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -27,9 +30,11 @@ import { FooterComponent } from './pages/components/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

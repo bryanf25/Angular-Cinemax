@@ -1,10 +1,9 @@
 <nav class="grey darken-3 social">
     <div class="nav-wrapper">
-        <ul class="left">
-            <li><a><fa-icon [icon]="faFacebook" size="2x"></fa-icon></a></li>
-            <li><a><fa-icon [icon]="faTwitter" size="2x"></fa-icon></a></li>
-            <li><a><fa-icon [icon]="faYoutube" size="2x"></fa-icon></a></li>
-            <li><a><fa-icon [icon]="faInstagram" size="2x"></fa-icon></a></li>
+        <ul class="left" *ngFor="let network of socialNetworkArray">
+            <li><a [href]="network.url" target="_blank">
+                <fa-icon [icon]="network.icon ?? faCircleExclamation" size="2x"></fa-icon></a></li>
+
         </ul>
         <!-- desktop -->
         <ul class="right hide-on-med-and-down">
@@ -15,10 +14,10 @@
         <!-- mobile -->
         <ul class="right hide-on-large-only">
             <li><a class="waves-effect waves-light btn-floating light-blue accent-3">
-                <fa-icon class="logicons" [icon]="faUserPlus" [style.fontSize.px]="24" [style.margin.top.px]="5"></fa-icon>
+                <fa-icon class="logicons" [icon]="generateIcon('UserPlus')" [style.fontSize.px]="24" [style.margin.top.px]="5"></fa-icon>
             </a></li>
             <li><a class="waves-effect waves-light btn-floating blue accent-4">
-                <fa-icon class="logicons" [icon]="faArrowRightToBracket" size="2x"></fa-icon>
+                <fa-icon class="logicons" [icon]="generateIcon('ArrowRightToBracket')" size="2x"></fa-icon>
             </a></li>
         </ul>
     </div>

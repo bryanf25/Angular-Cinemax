@@ -10,6 +10,7 @@ import { WeeklyBilboardsComponent } from '../components/weekly-bilboards/weekly-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { LandingPageComponent } from './landing-page.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('LandingPageComponent', () => {
   let component: LandingPageComponent;
@@ -29,7 +30,8 @@ describe('LandingPageComponent', () => {
          WeeklyBilboardsComponent
          ],
          imports:[
-          FontAwesomeModule
+          FontAwesomeModule,
+          HttpClientTestingModule
         ]
     })
     .compileComponents();

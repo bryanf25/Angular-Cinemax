@@ -3,12 +3,12 @@
         <div class="row">
             <h4 class="center-align">Cartelera Semanal</h4>
         </div>
-        <div class="row ">
-            <div class="col s12 m2 l2 card"  *ngFor="let item of arrayweekly">
+        <div class="row centermovies">
+            <div class="col s12 m2 l2 card"  *ngFor="let movie of arrayweekly">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" [src]="item" [alt]="item" >
+                    <img class="activator" [src]="movie.imagen" [alt]="movie.nombre" >
                 </div>
-                <div class="card-content">
+                <div class="card-content center-align">
                     <a><fa-icon [icon]="faHeart" [style.color]="'#0d47a1'"></fa-icon></a>
                     <a><fa-icon [icon]="faYoutube" [style.color]="'red'"></fa-icon></a>
                     <a><fa-icon [icon]="faStar" [style.color]="'#ffd600'"></fa-icon></a>
@@ -27,12 +27,12 @@
         <div class="row">
             <h4 class="center-align">Proximos Estrenos</h4>
         </div>
-        <div class="row ">
-            <div class="col s12 m2 l2 card"  *ngFor="let item of arraypremiers">
+        <div class="row centermovies">
+            <div class="col s12 m2 l2 card"  *ngFor="let movie of arraypremiers">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" [src]="item" [alt]="item" >
+                    <img class="activator" [src]="movie.imagen" [alt]="movie.nombre" >
                 </div>
-                <div class="card-content">
+                <div class="card-content center-align">
                     <a><fa-icon [icon]="faHeart" [style.color]="'#0d47a1'"></fa-icon></a>
                     <a><fa-icon [icon]="faYoutube" [style.color]="'red'"></fa-icon></a>
                     <a><fa-icon [icon]="faStar" [style.color]="'#ffd600'"></fa-icon></a>
