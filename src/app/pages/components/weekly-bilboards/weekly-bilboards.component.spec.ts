@@ -169,6 +169,12 @@ describe('WeeklyBilboardsComponent', () => {
   it('should be true state of movie when shows the billdboard',()=>{
     expect(component.arrayweekly.every(movie => movie.cartelera)).toBeTrue()
   })
+  
+  it('should be more than 6 billboard movies',() => {
+    spyOn(service, 'getMovies').and.returnValue(of(responseMockMovies))
+    component.ngOnInit()
+    expect(component.arrayweekly.length).toBeGreaterThanOrEqual(6)
+  })
 
   it('should be more than 6 premier movies',() => {
     spyOn(service, 'getMovies').and.returnValue(of(responseMockMovies))

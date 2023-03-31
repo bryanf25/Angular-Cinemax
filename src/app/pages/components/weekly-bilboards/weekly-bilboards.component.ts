@@ -67,8 +67,6 @@ export class WeeklyBilboardsComponent implements OnInit {
     this.arraypremiers = this.arrayMovies.filter(movie => movie.cartelera)
   }
 
-  getImageUrls(array: string[]): string[] {
-    return array.map(name => this.imgUrl + name + '.jpg');
-  }
+
 
 }

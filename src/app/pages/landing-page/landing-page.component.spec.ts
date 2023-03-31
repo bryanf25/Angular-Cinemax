@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { LandingPageComponent } from './landing-page.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('LandingPageComponent', () => {
   let component: LandingPageComponent;
@@ -31,7 +32,8 @@ describe('LandingPageComponent', () => {
          ],
          imports:[
           FontAwesomeModule,
-          HttpClientTestingModule
+          HttpClientTestingModule,
+          ReactiveFormsModule
         ]
     })
     .compileComponents();

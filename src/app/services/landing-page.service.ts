@@ -10,7 +10,19 @@ import { Movie } from '../interfaces/movie.interface';
 })
 export class LandingPageService {
 
+  get formats(){
+    return ['Doblada 2D','Doblada 3D','Original 2D','Original 3D']
+  }
 
+  get hours(){
+    let hours : string[] = []
+    for (let i = 2; i < 10; i = i+2) {
+      let hour = `${i}:00pm`
+      hours.push(hour)
+    }
+    return hours
+  }
+  
   constructor(private httpservice : HttpClient) { }
 
   getSocialNetwork(): Observable<SocialNetwork[]>{
@@ -19,6 +31,8 @@ export class LandingPageService {
 
   getMovies(): Observable<Movie[]>{
     return this.httpservice.get<Movie[]>(`${enviroment.urlBase}peliculas.json`)
-
   }
+
+
+
 }
