@@ -4,6 +4,10 @@ import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { LandingPageService } from 'src/app/services/landing-page.service';
 import { Movie } from 'src/app/interfaces/movie.interface';
 import { tap } from 'rxjs/operators';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+
+declare var $: any;
 
 @Component({
   selector: 'app-weekly-bilboards',
@@ -37,33 +41,42 @@ export class WeeklyBilboardsComponent implements OnInit {
   public arrayMovies: Movie[] = []
   public arrayweekly: Movie[] = []
   public arraypremiers: Movie[] = []
+
+  selectedVideoUrl!: SafeResourceUrl;
   // arrayweekly: string[] = this.getImageUrls(this.arrayWeeklyImg);
   // arraypremiers: string[] = this.getImageUrls(this.arrayPremiersImg);
 
-  constructor(public _landingservice: LandingPageService) { }
+  constructor(public _landingservice: LandingPageService,
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+    $(document).ready(function () {
+      $('.modal').modal();
+    });
     this.geAllMovies()
 
+  }
+
+  updateSelectedUrl(url: string) {
+    url = url.replace('watch?v=', 'embed/')
+    this.selectedVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}?autoplay=1`)
   }
 
   geAllMovies() {
     this._landingservice.getMovies().pipe(
       tap(movies => {
-      this.arrayMovies = movies;
-      this.getBillboardMovies();
-      this.getPremierMovies();
-    })
-  ).subscribe();
+        this.arrayMovies = movies;
+        this.getBillboardMovies();
+        this.getPremierMovies();
+      })
+    ).subscribe();
   }
 
-  getBillboardMovies()
-  {
+  getBillboardMovies() {
     this.arrayweekly = this.arrayMovies.filter(movie => !movie.cartelera)
   }
 
-  getPremierMovies()
-  {
+  getPremierMovies() {
     this.arraypremiers = this.arrayMovies.filter(movie => movie.cartelera)
   }
 
