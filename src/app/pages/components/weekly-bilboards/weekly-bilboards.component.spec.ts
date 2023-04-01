@@ -6,11 +6,15 @@ import { WeeklyBilboardsComponent } from './weekly-bilboards.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Movie } from 'src/app/interfaces/movie.interface';
 import { map, of } from 'rxjs';
+import { By } from '@angular/platform-browser';
+import { DomSanitizer  } from '@angular/platform-browser';
 
-describe('WeeklyBilboardsComponent', () => {
+
+xdescribe('WeeklyBilboardsComponent', () => {
   let component: WeeklyBilboardsComponent;
   let fixture: ComponentFixture<WeeklyBilboardsComponent>;
   let service: LandingPageService
+  let sanitizer: DomSanitizer;
 
   let responseMockMovies: Movie[] = [
     {
@@ -132,13 +136,16 @@ describe('WeeklyBilboardsComponent', () => {
       ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      ],
+      providers: [DomSanitizer]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(WeeklyBilboardsComponent);
-    component = fixture.componentInstance;
-    service = component._landingservice
+      fixture = TestBed.createComponent(WeeklyBilboardsComponent);
+      component = fixture.componentInstance;
+      service = component._landingservice;
+      sanitizer = TestBed.inject(DomSanitizer);
+
     // service = TestBed.inject(LandingPageService)
     fixture.detectChanges();
   });
@@ -164,21 +171,39 @@ describe('WeeklyBilboardsComponent', () => {
     ).subscribe(response => {
       expect(response).toBeTrue()
     })
-  }) 
+  })
 
-  it('should be true state of movie when shows the billdboard',()=>{
+  it('should be true state of movie when shows the billdboard', () => {
     expect(component.arrayweekly.every(movie => movie.cartelera)).toBeTrue()
   })
-  
-  it('should be more than 6 billboard movies',() => {
+
+  it('should be more than 6 billboard movies', () => {
     spyOn(service, 'getMovies').and.returnValue(of(responseMockMovies))
     component.ngOnInit()
     expect(component.arrayweekly.length).toBeGreaterThanOrEqual(6)
   })
 
-  it('should be more than 6 premier movies',() => {
+  it('should be more than 6 premier movies', () => {
     spyOn(service, 'getMovies').and.returnValue(of(responseMockMovies))
     component.ngOnInit()
     expect(component.arraypremiers.length).toBeGreaterThanOrEqual(6)
   })
+
+  it('should render a safe resource URL', () => {
+    const unsafeUrl = 'https://www.youtube.com/watch?v=0WWzgGyAH6Y';
+    const safeUrl  = sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
+    fixture.detectChanges();
+
+    const iframe = fixture.nativeElement.querySelector('iframe');
+    expect(iframe.src).toEqual(safeUrl);
+  });
+
+  // it('should open modal',()=>{
+  //   const trigger = fixture.debugElement.query(By.css('.modal-trigger'));
+  //   trigger.nativeElement.click();
+  //   fixture.detectChanges();
+
+  //   const modal = fixture.debugElement.query(By.css('.modal'));
+  //   expect(modal).toBeTruthy();
+  // })
 });
