@@ -1,23 +1,25 @@
-.card-content a{
+.card-content a {
     font-size: 18px;
     padding-left: 8px;
 }
 
-.card{
-    margin-left: 3% !important;
+.card {
+    margin-left: 5% !important;
+    height: auto;
+    width: fit-content !important;
 }
 
-.row{
+.row {
     margin-bottom: 0px !important;
 }
 
- /* .card-image img {
-     sirve para ajustar las imagenes y no se desborden de su contenedor
-    de esta manera no aparecen espacios en blanco 
-     width: 200px;
-    height: 200px; 
-     object-fit: cover; 
-  }  */
+.card-image img {
+    /* sirve para ajustar las imagenes y no se desborden de su contenedor
+    de esta manera no aparecen espacios en blanco  */
+    width: 250px;
+    height: 350px;
+}
 
-
-
+.centermovies {
+    padding-left: 10%;
+}

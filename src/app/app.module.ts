@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -11,6 +11,13 @@ import { SlidesComponent } from './pages/components/slides/slides.component';
 import { WeeklyBilboardsComponent } from './pages/components/weekly-bilboards/weekly-bilboards.component';
 import { CarouselComponent } from './pages/components/carousel/carousel.component';
 import { FooterComponent } from './pages/components/footer/footer.component';
+import { LandingPageService } from './services/landing-page.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import localeEs from '@angular/common/locales/es-CO'
+import { registerLocaleData } from "@angular/common";
+import {  ReactiveFormsModule } from '@angular/forms';
+registerLocaleData(localeEs)
 
 
 @NgModule({
@@ -27,9 +34,14 @@ import { FooterComponent } from './pages/components/footer/footer.component';
   ],
   imports: [
     BrowserModule,
-    FontAwesomeModule
+    CommonModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'es-CO'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
