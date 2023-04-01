@@ -4,13 +4,15 @@
             <h4 class="center-align">Cartelera Semanal</h4>
         </div>
         <div class="row centermovies">
-            <div class="col s12 m2 l2 card"  *ngFor="let movie of arrayweekly">
+            <div class="col s12 m2 l2 card" *ngFor="let movie of arrayweekly">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" [src]="movie.imagen" [alt]="movie.nombre" >
+                    <img class="activator" [src]="movie.imagen" [alt]="movie.nombre">
                 </div>
                 <div class="card-content center-align">
                     <a><fa-icon [icon]="faHeart" [style.color]="'#0d47a1'"></fa-icon></a>
-                    <a><fa-icon [icon]="faYoutube" [style.color]="'red'"></fa-icon></a>
+                    <a href="#modal1" class="modal-trigger" [attr.data-url]="movie.trailer"
+                    (click)="updateSelectedUrl(movie.trailer)">
+                        <fa-icon [icon]="faYoutube" [style.color]="'red'"></fa-icon></a>
                     <a><fa-icon [icon]="faStar" [style.color]="'#ffd600'"></fa-icon></a>
                     <a><fa-icon [icon]="faLanguage" [style.color]="'black'"></fa-icon></a>
                     <a><fa-icon [icon]="faShareNodes" [style.color]="'green'"></fa-icon></a>
@@ -28,12 +30,14 @@
             <h4 class="center-align">Proximos Estrenos</h4>
         </div>
         <div class="row centermovies">
-            <div class="col s12 m2 l2 card"  *ngFor="let movie of arraypremiers">
+            <div class="col s12 m2 l2 card" *ngFor="let movie of arraypremiers">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" [src]="movie.imagen" [alt]="movie.nombre" >
+                    <img class="activator" [src]="movie.imagen" [alt]="movie.nombre">
                 </div>
                 <div class="card-content center-align">
-                    <a><fa-icon [icon]="faYoutube" [style.color]="'red'"></fa-icon></a>
+                    <a href="#modal1" class="modal-trigger" [attr.data-url]="movie.trailer"
+                        (click)="updateSelectedUrl(movie.trailer)">
+                        <fa-icon [icon]="faYoutube" [style.color]="'red'"></fa-icon></a>
                     <a><fa-icon [icon]="faLanguage" [style.color]="'black'"></fa-icon></a>
                     <a><fa-icon [icon]="faShareNodes" [style.color]="'green'"></fa-icon></a>
                 </div>
@@ -45,4 +49,18 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <!-- <video [src]="selectedVideoUrl" controls type="video/mp4"></video> -->
+        <iframe  [src]="selectedVideoUrl" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; fullscreen;  encrypted-media; gyroscope; web-share" 
+        allowfullscreen></iframe>
+    </div>
+    <!-- <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div> -->
 </div>
