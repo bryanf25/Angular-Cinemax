@@ -2,36 +2,33 @@
     <h6 class="left-align">
         <strong>Compra tus entradas online</strong>
     </h6>
-    <div class="input-field col s12 m3 l3">
-        <select>
-            <option value="" disabled selected>Fecha</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-    </div>
-    <div class="input-field col s12 m3 l3">
-        <select>
-            <option value="" disabled selected>Pelicula</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-    </div>
-    <div class="input-field col s12 m3 l3">
-        <select>
-            <option value="" disabled selected>Formato</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-    </div>
-    <div class="input-field col s12 m3 l3">
-        <select>
-            <option value="" disabled selected>Hora</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-    </div>
+    <form [formGroup]="myForm">
+        <div class="input-field col s12 m3 l3">
+            <select formControlName="moviesFilter" >
+                <option value="" disabled selected>Fecha</option>
+                <option *ngFor="let date of dateArray" [value]="date">
+                    {{date | date:'longDate' }}</option>
+            </select>
+        </div>
+        <div class="input-field col s12 m3 l3">
+            <select formControlName="moviesFilter" class="browser-format"  >
+                <option value="" disabled selected>Pelicula</option>
+                <option *ngFor="let name of moviesName" [value]="name">
+                    {{name}}</option>
+            </select>
+        </div>
+        <div class="input-field col s12 m3 l3">
+            <select >
+                <option value="" disabled selected>Formato</option>
+                <option *ngFor="let format of formats" [value]="format">{{format}}</option>
+
+            </select>
+        </div>
+        <div class="input-field col s12 m3 l3">
+            <select >
+                <option value="" disabled selected>Hora</option>
+                <option *ngFor="let hour of hours" [value]="hour">{{hour}}</option>
+            </select>
+        </div>
+    </form>
 </div>

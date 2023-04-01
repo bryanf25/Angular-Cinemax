@@ -1,16 +1,31 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LandingPageService } from 'src/app/services/landing-page.service';
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { WeeklyBilboardsComponent } from './weekly-bilboards.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { Movie } from 'src/app/interfaces/movie.interface';
-import { map, of } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 
-describe('WeeklyBilboardsComponent', () => {
-  let component: WeeklyBilboardsComponent;
-  let fixture: ComponentFixture<WeeklyBilboardsComponent>;
-  let service: LandingPageService
+import { LandingPageService } from './landing-page.service';
+import { SocialNetwork } from '../interfaces/social-network.interface';
+import { Movie } from '../interfaces/movie.interface';
+
+describe('LandingPageService', () => {
+  let service: LandingPageService;
+  let HttpMock: HttpTestingController
+  let responseMockNetworks: SocialNetwork[] = [
+    {
+      "nombre": "Facebook",
+      "url": "https://es-la.facebook.com/"
+    },
+    {
+      "nombre": "Twitter",
+      "url": "https://twitter.com/?lang=es"
+    },
+    {
+      "nombre": "Youtube",
+      "url": "https://www.youtube.com"
+    },
+    {
+      "nombre": "Instagram",
+      "url": "https://www.instagram.com/"
+    }
+  ]
 
   let responseMockMovies: Movie[] = [
     {
@@ -123,62 +138,67 @@ describe('WeeklyBilboardsComponent', () => {
     }
   ]
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [WeeklyBilboardsComponent],
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [
-        FontAwesomeModule,
         HttpClientTestingModule
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
       ]
-    })
-      .compileComponents();
-
-    fixture = TestBed.createComponent(WeeklyBilboardsComponent);
-    component = fixture.componentInstance;
-    service = component._landingservice
-    // service = TestBed.inject(LandingPageService)
-    fixture.detectChanges();
+    });
+    service = TestBed.inject(LandingPageService);
+    HttpMock = TestBed.inject(HttpTestingController)
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 
-  it('should inject service', () => {
-    expect(service).toBeTruthy()
-  })
-
-  it('should use method getMovies() of LandinpageServie at least one time', () => {
-    let getMovies = spyOn(service, 'getMovies').and.returnValue(of(responseMockMovies))
-    component.ngOnInit();
-    expect(getMovies).toHaveBeenCalled()
-  })
-
-  it('should be urlImage the propertie image from AllMovies', () => {
-    spyOn(service, 'getMovies').and.returnValue(of(responseMockMovies))
-    service.getMovies().pipe(
-      map(movies => movies.every(movie => movie.imagen.includes('https')))
-    ).subscribe(response => {
-      expect(response).toBeTrue()
+  it('should get method getSocialNetwork() and return socialNetworks', () => {
+    service.getSocialNetwork().subscribe(networks => {
+      expect(networks.length).toBe(4)
+      expect(networks).toBe(responseMockNetworks)
     })
-  }) 
 
-  it('should be true state of movie when shows the billdboard',()=>{
-    expect(component.arrayweekly.every(movie => movie.cartelera)).toBeTrue()
-  })
-  
-  it('should be more than 6 billboard movies',() => {
-    spyOn(service, 'getMovies').and.returnValue(of(responseMockMovies))
-    component.ngOnInit()
-    expect(component.arrayweekly.length).toBeGreaterThanOrEqual(6)
+    // intercepto una simulacion del request especificandole la url y evaluo si son la misma con mi servicio 
+    const testRequest = HttpMock.expectOne('https://cinemax-74393-default-rtdb.firebaseio.com/RedesSociales.json')
+    // compruebo de que sea el verbo get y no otro como por ejemplo post put o delete
+    expect(testRequest.request.method).toBe('GET')
+    testRequest.flush(responseMockNetworks)
   })
 
-  it('should be more than 6 premier movies',() => {
-    spyOn(service, 'getMovies').and.returnValue(of(responseMockMovies))
-    component.ngOnInit()
-    expect(component.arraypremiers.length).toBeGreaterThanOrEqual(6)
+  it('should get method getMovies() and return Movies', () => {
+
+    service.getMovies().subscribe(movies => {
+      let premieres = movies.filter(premier => !premier.cartelera)
+      let bilboards = movies.filter(bilboard => bilboard.cartelera)
+      expect(premieres.length).toBeGreaterThanOrEqual(6)
+      expect(bilboards.length).toBeGreaterThanOrEqual(6)
+    })
+
+    // intercepto una simulacion del request especificandole la url 
+    const testRequest = HttpMock.expectOne('https://cinemax-74393-default-rtdb.firebaseio.com/peliculas.json')
+    // compruebo de que sea el verbo get y no otro como por ejemplo post put o delete
+    expect(testRequest.request.method).toBe('GET')
+    testRequest.flush(responseMockMovies)
   })
+
+
+  it('should be formats array must have 4 formats', () => {
+    expect(service.formats.length).toEqual(4)
+  })
+
+  it('should be hours array must have 5 hours', () => {
+
+    let hours: string[] = []
+
+    for (let i = 2; i < 10; i = i + 2) {
+      let hour = `${i}:00pm`
+      hours.push(hour)
+    }
+    expect(hours.length).toEqual(4)
+    for (let j = 0; j < service.hours.length; j++) {
+      expect(service.hours[j]).toEqual(hours[j])
+    }
+
+  })
+
 });
