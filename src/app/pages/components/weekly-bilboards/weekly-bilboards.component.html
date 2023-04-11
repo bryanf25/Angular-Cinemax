@@ -11,7 +11,7 @@
                 <div class="card-content center-align">
                     <a><fa-icon [icon]="faHeart" [style.color]="'#0d47a1'"></fa-icon></a>
                     <a href="#modal1" class="modal-trigger" [attr.data-url]="movie.trailer"
-                    (click)="updateSelectedUrl(movie.trailer)">
+                        (click)="updateSelectedUrl(movie.trailer)">
                         <fa-icon [icon]="faYoutube" [style.color]="'red'"></fa-icon></a>
                     <a><fa-icon [icon]="faStar" [style.color]="'#ffd600'"></fa-icon></a>
                     <a><fa-icon [icon]="faLanguage" [style.color]="'black'"></fa-icon></a>
@@ -42,9 +42,9 @@
                     <a><fa-icon [icon]="faShareNodes" [style.color]="'green'"></fa-icon></a>
                 </div>
                 <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Card Title<i
+                    <span class="card-title grey-text text-darken-4">{{movie.nombre}}<i
                             class="material-icons right">close</i></span>
-                    <p >Here is some more information about this product that is only revealed once clicked on.</p>
+                    <p>{{movie.descripcion}}</p>
                 </div>
             </div>
         </div>
@@ -52,13 +52,11 @@
 </div>
 
 <div id="modal1" class="modal">
-    <div class="modal-content" >
+    <div class="modal-content">
         <!-- <video [src]="selectedVideoUrl" controls type="video/mp4"></video> -->
-        <iframe  [src]="selectedVideoUrl" 
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; fullscreen;  encrypted-media; gyroscope; web-share" 
-        allowfullscreen></iframe>
+        <iframe [src]="selectedVideoUrl" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; fullscreen;  encrypted-media; gyroscope; web-share"
+            allowfullscreen></iframe>
     </div>
     <!-- <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
